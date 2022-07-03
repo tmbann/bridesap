@@ -44,7 +44,12 @@
         <v-btn elevation="5" rounded color="pink lighten-2" class="white--text">撮影</v-btn>
       </v-col>
       <v-col cols="12">
-        <v-btn elevation="5" rounded color="pink lighten-3" class="white--text">ユーザー登録</v-btn>
+        <router-link
+          :to="{ name: 'RegisterIndex' }"
+          class="nav-link"
+        >
+          <v-btn elevation="5" rounded color="pink lighten-3" class="white--text">ユーザー登録</v-btn>
+        </router-link>
         <p class="subheading font-weight-regular pink--text mt-3">
           判定結果を保存するには、ユーザー登録が必要です
         </p>
