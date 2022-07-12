@@ -36,6 +36,14 @@
         <template v-else>
           <v-list-item>
             <router-link
+              :to="{ name: 'Mypage' }"
+              class="nav-link"
+            >
+              <v-list-item-title>マイページ</v-list-item-title>
+            </router-link>
+          </v-list-item>
+          <v-list-item>
+            <router-link
               :to="{ name: '#' }"
               class="nav-link"
               @click.native="handleLogout"

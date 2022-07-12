@@ -1,16 +1,24 @@
 import axios from "../../plugins/axios";
 
 const state = {
-  authUser: null
+  authUser: null,
+  user: []
 }
 
 const getters = {
-  authUser: state => state.authUser
+  authUser: state => state.authUser,
+  user: state => state.user
 }
 
 const mutations = {
+  setAuthUser: (state, authUser) => {
+    state.authUser = authUser
+  },
   setUser: (state, user) => {
-    state.authUser = user
+    state.user = user
+  },
+  updateUser: (state, user) => {
+    state.user = user
   }
 };
 
@@ -21,12 +29,12 @@ const actions = {
     axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.auth_token}`
     
     const userResponse = await axios.get('users/me')
-    commit('setUser', userResponse.data)
+    commit('setAuthUser', userResponse.data)
   },
   logoutUser({ commit }) {
     localStorage.removeItem('auth_token')
     axios.defaults.headers.common['Authorization'] = ''
-    commit("setUser", null);
+    commit("setAuthUser", null);
   },
   async fetchAuthUser({ commit, state }) {
     if (!localStorage.auth_token) return null
@@ -40,12 +48,21 @@ const actions = {
 
     const authUser = userResponse.data
     if (authUser) {
-      commit('setUser', authUser)
+      commit('setAuthUser', authUser)
       return authUser
     } else {
-      commit('setUser', null)
+      commit('setAuthUser', null)
       return null
     }
+  },
+  fetchUser({ commit }) {
+    axios.get('mypage')
+      .then(res => { commit('setUser', res.data) })
+      .catch(err => console.log(err.response));
+  },
+  async updateUser({ commit }, user) {
+    const res = await axios.patch('mypage', {user})
+    commit('updateUser', res.data)
   }
 };
 
