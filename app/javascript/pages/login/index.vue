@@ -63,7 +63,7 @@ export default {
     async login() {
       try {
         await this.loginUser(this.user);
-        this.$router.push({ name: 'TopIndex' }) //後でマイページ遷移に変更
+        this.$router.push({ name: 'Mypage' })
       }catch(error) {
         console.log(error);
       }
