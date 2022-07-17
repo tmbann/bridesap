@@ -32,6 +32,14 @@
               ログイン
             </router-link>
           </v-list-item>
+          <v-list-item>
+            <router-link
+              :to="{ name: 'Pose' }"
+              class="nav-link"
+            >
+              撮影
+            </router-link>
+          </v-list-item>
         </template>
         <template v-else>
           <v-list-item>
@@ -44,12 +52,14 @@
           </v-list-item>
           <v-list-item>
             <router-link
-              :to="{ name: '#' }"
+              :to="{ name: 'Pose' }"
               class="nav-link"
-              @click.native="handleLogout"
             >
-              <v-list-item-title>ログアウト</v-list-item-title>
+              撮影
             </router-link>
+          </v-list-item>
+          <v-list-item @click.native="handleLogout">
+            <v-list-item-title>ログアウト</v-list-item-title>
           </v-list-item>
         </template>
       </v-list>
