@@ -11,7 +11,11 @@
 
     <v-col cols="12">
       <v-row justify="center">
-        <v-btn elevation="5" rounded color="pink lighten-2" class="white--text">撮影</v-btn>
+        <router-link
+          :to="{ name: 'Pose' }"
+        >
+          <v-btn elevation="5" rounded color="pink lighten-2" class="white--text">撮影</v-btn>
+        </router-link>
       </v-row>
     </v-col>
 

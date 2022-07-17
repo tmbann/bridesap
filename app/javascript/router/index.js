@@ -6,6 +6,7 @@ import TopIndex from "../pages/top/index"
 import RegisterIndex from "../pages/register/index"
 import LoginIndex from "../pages/login/index"
 import Mypage from "../pages/mypage/show"
+import Pose from "../pages/pose/index"
 
 Vue.use(Router)
 
@@ -33,6 +34,11 @@ const router = new Router({
       name: 'Mypage',
       meta: { requiredAuth: true }
     },
+    {
+      path: '/poses',
+      component : Pose,
+      name: 'Pose',
+    }
   ],
 })
   
