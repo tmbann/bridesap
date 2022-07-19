@@ -13,7 +13,7 @@
               :to="{ name: 'TopIndex' }"
               class="nav-link"
             >
-              TOP
+              <v-list-item-title>TOP</v-list-item-title>
             </router-link>
           </v-list-item>
           <v-list-item>
@@ -21,7 +21,7 @@
               :to="{ name: 'RegisterIndex' }"
               class="nav-link"
             >
-              ユーザー登録
+              <v-list-item-title>ユーザー登録</v-list-item-title>
             </router-link>
           </v-list-item>
           <v-list-item>
@@ -29,7 +29,7 @@
               :to="{ name: 'LoginIndex' }"
               class="nav-link"
             >
-              ログイン
+              <v-list-item-title>ログイン</v-list-item-title>
             </router-link>
           </v-list-item>
           <v-list-item>
@@ -37,11 +37,19 @@
               :to="{ name: 'Pose' }"
               class="nav-link"
             >
-              撮影
+              <v-list-item-title>撮影</v-list-item-title>
             </router-link>
           </v-list-item>
         </template>
         <template v-else>
+          <v-list-item>
+            <router-link
+              :to="{ name: 'TopIndex' }"
+              class="nav-link"
+            >
+              <v-list-item-title>TOP</v-list-item-title>
+            </router-link>
+          </v-list-item>
           <v-list-item>
             <router-link
               :to="{ name: 'Mypage' }"
@@ -55,10 +63,10 @@
               :to="{ name: 'Pose' }"
               class="nav-link"
             >
-              撮影
+              <v-list-item-title>撮影</v-list-item-title>
             </router-link>
           </v-list-item>
-          <v-list-item @click.native="handleLogout">
+          <v-list-item link @click.native="handleLogout">
             <v-list-item-title>ログアウト</v-list-item-title>
           </v-list-item>
         </template>
@@ -95,4 +103,8 @@ export default {
 </script>
 
 <style scoped>
+.nav-link {
+  text-decoration: none;
+  color: gray;
+}
 </style>

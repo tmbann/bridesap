@@ -13,8 +13,9 @@
       <v-row justify="center">
         <router-link
           :to="{ name: 'Pose' }"
+          class="nav-link"
         >
-          <v-btn elevation="5" rounded color="pink lighten-2" class="white--text">撮影</v-btn>
+          <v-btn elevation="5" rounded color="pink lighten-2" class="white--text mb-3">Shooting Start</v-btn>
         </router-link>
       </v-row>
     </v-col>
@@ -36,7 +37,7 @@
                 v-bind="attrs"
                 v-on="on"
               >
-                ユーザー編集
+                Mypage Edit
               </v-btn>
             </template>
             <v-card>
@@ -203,4 +204,7 @@ export default {
 </script>
 
 <style scoped>
+.nav-link {
+  text-decoration: none;
+}
 </style>
