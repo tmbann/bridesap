@@ -43,6 +43,7 @@
       <v-col cols="12">
         <router-link
           :to="{ name: 'Pose' }"
+          class="nav-link"
         >
           <v-btn elevation="5" rounded color="pink lighten-2" class="white--text">撮影</v-btn>
         </router-link>
@@ -82,4 +83,7 @@ export default {
 </script>
 
 <style scoped>
+.nav-link {
+  text-decoration: none;
+}
 </style>
