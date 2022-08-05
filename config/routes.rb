@@ -7,6 +7,8 @@ Rails.application.routes.draw do
         get 'me'
       end
     end
+    resources :poses
+    resources :pure_poses
     resource :mypage
   end
 

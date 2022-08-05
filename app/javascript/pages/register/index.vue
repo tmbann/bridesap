@@ -123,6 +123,8 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from "vuex"
+
 export default {
   name: "RegisterIndex",
   data () {
@@ -139,18 +141,17 @@ export default {
       w_menu: null
     }
   },
+  computed: {
+    ...mapGetters("users", ["registeringUserId"])
+  },
   methods: {
+    ...mapActions("users", ["registerUser"]),
     submit () {
       this.$refs.observer.validate()
     },
-    register() {
-      this.$axios.post('users', { user: this.user })
-        .then(res => {
-          this.$router.push({ name: 'LoginIndex' })
-        })
-        .catch(err => {
-          console.log(err)
-        })
+    async register() {
+      await this.registerUser(this.user)
+      this.$router.push({ name: 'PurePose' })
     }
   }
 }
