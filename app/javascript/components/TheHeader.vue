@@ -7,15 +7,15 @@
     </v-app-bar>
     <v-navigation-drawer v-model="drawer" fixed temporary>
       <v-list nav dense>
+        <v-list-item>
+          <router-link
+            :to="{ name: 'TopIndex' }"
+            class="nav-link"
+          >
+            <v-list-item-title>TOP</v-list-item-title>
+          </router-link>
+        </v-list-item>
         <template v-if="!authUser">
-          <v-list-item>
-            <router-link
-              :to="{ name: 'TopIndex' }"
-              class="nav-link"
-            >
-              <v-list-item-title>TOP</v-list-item-title>
-            </router-link>
-          </v-list-item>
           <v-list-item>
             <router-link
               :to="{ name: 'RegisterIndex' }"
@@ -32,24 +32,8 @@
               <v-list-item-title>ログイン</v-list-item-title>
             </router-link>
           </v-list-item>
-          <v-list-item>
-            <router-link
-              :to="{ name: 'Pose' }"
-              class="nav-link"
-            >
-              <v-list-item-title>撮影</v-list-item-title>
-            </router-link>
-          </v-list-item>
         </template>
         <template v-else>
-          <v-list-item>
-            <router-link
-              :to="{ name: 'TopIndex' }"
-              class="nav-link"
-            >
-              <v-list-item-title>TOP</v-list-item-title>
-            </router-link>
-          </v-list-item>
           <v-list-item>
             <router-link
               :to="{ name: 'Mypage' }"

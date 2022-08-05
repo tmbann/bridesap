@@ -42,28 +42,32 @@
 
       <v-col cols="12">
         <router-link
-          :to="{ name: 'Pose' }"
-          class="nav-link"
-        >
-          <v-btn elevation="5" rounded color="pink lighten-2" class="white--text">撮影</v-btn>
-        </router-link>
-      </v-col>
-      <v-col cols="12">
-        <router-link
           :to="{ name: 'RegisterIndex' }"
           class="nav-link"
         >
           <v-btn elevation="5" rounded color="pink lighten-3" class="white--text">ユーザー登録</v-btn>
         </router-link>
         <p class="subheading font-weight-regular pink--text mt-3">
-          判定結果を保存するには、ユーザー登録が必要です
+          まずはユーザー登録から
         </p>
       </v-col>
+      <template v-if="authUser">
+        <v-col cols="12">
+          <router-link
+            :to="{ name: 'Pose' }"
+            class="nav-link"
+          >
+            <v-btn elevation="5" rounded color="pink lighten-4" class="white--text">撮影</v-btn>
+          </router-link>
+        </v-col>
+      </template>
     </v-row>
   </v-container>
 </template>
 
 <script>
+import { mapGetters } from "vuex"
+
 export default {
   data() {
     return {
@@ -78,7 +82,10 @@ export default {
         }
       ]
     }
-  }
+  },
+  computed: {
+    ...mapGetters("users", ["authUser"])
+  },
 }
 </script>
 

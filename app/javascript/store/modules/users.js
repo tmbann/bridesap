@@ -2,12 +2,14 @@ import axios from "../../plugins/axios";
 
 const state = {
   authUser: null,
-  user: []
+  user: [],
+  registeringUserId: null
 }
 
 const getters = {
   authUser: state => state.authUser,
-  user: state => state.user
+  user: state => state.user,
+  registeringUserId: state => state.registeringUserId 
 }
 
 const mutations = {
@@ -19,6 +21,9 @@ const mutations = {
   },
   updateUser: (state, user) => {
     state.user = user
+  },
+  setRegisteringUserID: (state, user_id) => {
+    state.registeringUserId = user_id
   }
 };
 
@@ -54,6 +59,11 @@ const actions = {
       commit('setAuthUser', null)
       return null
     }
+  },
+  registerUser({ commit }, user) {
+    axios.post('users', {user})
+      .then(res => { commit('setRegisteringUserID', res.data.id)})
+      .catch(err => console.log(err.response))
   },
   fetchUser({ commit }) {
     axios.get('mypage')
