@@ -176,14 +176,14 @@
       <h2>判定結果</h2>
       <br />
       <div>
-        <img :src="purePose.pure_image" />
         <template v-if="purePose.pure_pose">
+          <img :src="purePose.pure_image" />
           <h3>{{ purePose.pure_pose.pure_shoulder_width }}</h3>
         </template>
       </div>
       <div>
-        <img :src="bestPose.best_image" />
         <template v-if="bestPose.best_pose">
+          <img :src="bestPose.best_image" />
           <h3> {{ bestPose.best_pose.shoulder_width }} </h3>
         </template>
       </div>

@@ -3,10 +3,16 @@ class Api::PosesController < ApplicationController
 
   def index
     @best_pose = current_user.poses.all.order(shoulder_width: :asc).first # @pose保存前の最小値を取得
-    @best_pose.image = encode_base64(@best_pose.pose_image)
-    render json: { "best_pose" => @best_pose,
-                   "best_image" => @best_pose.image
-                 }
+    if @best_pose
+      @best_pose.image = encode_base64(@best_pose.pose_image)
+      render json: { "best_pose" => @best_pose,
+                     "best_image" => @best_pose.image
+                   }
+    else
+      render json: { "best_pose" => nil,
+                     "best_image" => nil
+                   }
+    end
   end
   
   def create
