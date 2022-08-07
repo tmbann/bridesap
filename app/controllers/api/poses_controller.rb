@@ -1,21 +1,27 @@
 class Api::PosesController < ApplicationController
+  before_action :authenticate!
+
+  def index
+    @best_pose = current_user.poses.all.order(shoulder_width: :asc).first # @pose保存前の最小値を取得
+    @best_pose.image = encode_base64(@best_pose.pose_image)
+    render json: { "best_pose" => @best_pose,
+                   "best_image" => @best_pose.image
+                 }
+  end
+  
   def create
     @pose = current_user.poses.build(pose_params)
     @pose.parse_base64(params[:pose][:image])
 
     @pure_pose = PurePose.find_by(user_id: current_user.id)
-    @best_pose = current_user.poses.all.order(shoulder_width: :asc).first # @pose保存前の最小値を取得
 
     if @pose.save
       @pose.image = encode_base64(@pose.pose_image)
-      @pure_pose.image = encode_base64(@pure_pose.pure_pose_image)
 
       if @pure_pose.pure_shoulder_width > @pose.shoulder_width && @best_pose == nil
         @score = @pure_pose.pure_shoulder_width - @pose.shoulder_width
         @result = current_user.results.create(score: @score, comment: "自己ベスト！", pose_id: @pose.id)
         render json: { "result" => @result,
-                       "pure_pose" => @pure_pose,
-                       "best_pose" => @pose,
                        "pose" => @pose,
                        "image" => @pose.image
                      }
@@ -25,15 +31,12 @@ class Api::PosesController < ApplicationController
         if @pose.shoulder_width < @best_pose.shoulder_width
           @result = current_user.results.create(score: @score, comment: "自己ベスト更新！", pose_id: @pose.id)
           render json: { "result" => @result,
-                         "pure_pose" => @pure_pose,
-                         "best_pose" => @pose,
-                         "pose" => @pose
+                         "pose" => @pose,
+                         "image" => @pose.image
                        }
         else
           @result = current_user.results.create(score: @score, comment: "まだノビシロあるよ", pose_id: @pose.id)
           render json: { "result" => @result,
-                         "pure_pose" => @pure_pose,
-                         "best_pose" => @best_pose,
                          "pose" => @pose,
                          "image" => @pose.image
                        }
@@ -41,16 +44,12 @@ class Api::PosesController < ApplicationController
       elsif @pure_pose.pure_shoulder_width <= @pose.shoulder_width && @best_pose
         @result = current_user.results.create(score: 0, comment: "ポイントを見直しましょう", pose_id: @pose.id)
         render json: { "result" => @result,
-                       "pure_pose" => @pure_pose,
-                       "best_pose" => @best_pose,
                        "pose" => @pose,
                        "image" => @pose.image
                      }
       else
         @result = current_user.results.create(score: 0, comment: "1mmも華奢になれてません", pose_id: @pose.id)
         render json: { "result" => @result,
-                       "pure_pose" => @pure_pose,
-                       "best_pose" => nil,
                        "pose" => @pose,
                        "image" => @pose.image
                      }
