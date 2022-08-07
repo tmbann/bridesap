@@ -15,7 +15,13 @@
           :to="{ name: 'Pose' }"
           class="nav-link"
         >
-          <v-btn elevation="5" rounded color="pink lighten-2" class="white--text mb-3">Shooting Start</v-btn>
+          <v-btn
+            elevation="5"
+            rounded color="pink lighten-2"
+            class="white--text mb-3"
+          >
+            Shooting Start
+          </v-btn>
         </router-link>
       </v-row>
     </v-col>
@@ -165,6 +171,23 @@
         </v-row>
       </template>
     </v-col>
+
+    <v-col cols="12">
+      <h2>判定結果</h2>
+      <br />
+      <div>
+        <img :src="purePose.pure_image" />
+        <template v-if="purePose.pure_pose">
+          <h3>{{ purePose.pure_pose.pure_shoulder_width }}</h3>
+        </template>
+      </div>
+      <div>
+        <img :src="bestPose.best_image" />
+        <template v-if="bestPose.best_pose">
+          <h3> {{ bestPose.best_pose.shoulder_width }} </h3>
+        </template>
+      </div>
+    </v-col>
   </v-container>
 </template>
 
@@ -182,9 +205,11 @@ export default {
   },
   computed: {
     ...mapGetters("users", ["user", "authUser"]),
+    ...mapGetters("poses", ["purePose", "bestPose"])
   },
   methods: {
     ...mapActions("users", ["fetchUser", "updateUser"]),
+    ...mapActions("poses", ["fetchPurePose", "fetchBestPose"]),
     submit () {
       this.$refs.observer.validate()
     },
@@ -198,7 +223,9 @@ export default {
     }
   },
   created() {
-    this.fetchUser();
+    this.fetchUser(),
+    this.fetchPurePose(),
+    this.fetchBestPose()
   }
 }
 </script>

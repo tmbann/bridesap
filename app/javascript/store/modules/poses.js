@@ -1,16 +1,26 @@
 import axios from "../../plugins/axios";
 
 const state = {
-  pose: []
+  pose: [],
+  purePose: [],
+  bestPose: []
 }
 
 const getters = {
-  pose: state => state.pose
+  pose: state => state.pose,
+  purePose: state => state.purePose,
+  bestPose: state => state.bestPose
 }
 
 const mutations = {
   setPose: (state, pose) => {
     state.pose = pose
+  },
+  setPurePose: (state, purePose) => {
+    state.purePose = purePose
+  },
+  setBestPose: (state, bestPose) => {
+    state.bestPose = bestPose
   }
 }
 
@@ -19,6 +29,16 @@ const actions = {
     const res = await axios.post('poses', poseData)
     commit('setPose', res.data) //res.data.result.score とかで取得できる
     console.log(res.data)
+  },
+  fetchPurePose({ commit }) {
+    axios.get('pure_poses')
+      .then(res => { commit('setPurePose', res.data) })
+      .catch(err => console.log(err.response));
+  },
+  fetchBestPose({ commit }) {
+    axios.get('poses')
+      .then(res => { commit('setBestPose', res.data) })
+      .catch(err => console.log(err.response))
   }
 }
 

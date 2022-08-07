@@ -1,5 +1,4 @@
 class Pose < ApplicationRecord
-#  include Rails.application.routes.url_helpers
 
   belongs_to :user
   has_one :result, dependent: :destroy
@@ -19,10 +18,6 @@ class Pose < ApplicationRecord
     end
     attach_image(filename)
   end
-
-#  def pose_image_url
-#    pose_image.attached? ? url_for(pose_image) : nil
-#  end
 
   private
 
