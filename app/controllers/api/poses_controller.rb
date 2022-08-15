@@ -20,6 +20,7 @@ class Api::PosesController < ApplicationController
     @pose.parse_base64(params[:pose][:image])
 
     @pure_pose = PurePose.find_by(user_id: current_user.id)
+    @best_pose = current_user.poses.all.order(shoulder_width: :asc).first # @pose保存前の最小値を取得
 
     if @pose.save
       @pose.image = encode_base64(@pose.pose_image)

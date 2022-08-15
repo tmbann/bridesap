@@ -1,10 +1,16 @@
 class Api::PurePosesController < ApplicationController
   def index
     @pure_pose = PurePose.find_by(user_id: current_user.id)
-    @pure_pose.image = encode_base64(@pure_pose.pure_pose_image)
-    render json: { "pure_pose" => @pure_pose,
-                   "pure_image" => @pure_pose.image
-                 }
+    if @pure_pose
+      @pure_pose.image = encode_base64(@pure_pose.pure_pose_image)
+      render json: { "pure_pose" => @pure_pose,
+                     "pure_image" => @pure_pose.image
+                   }
+    else
+      render json: { "pure_pose" => nil,
+                     "pure_image" => nil
+                   }
+    end
   end
   
   def create

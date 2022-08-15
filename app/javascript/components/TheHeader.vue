@@ -8,6 +8,7 @@
     <v-navigation-drawer v-model="drawer" fixed temporary>
       <v-list nav dense>
         <v-list-item>
+          <v-icon>mdi-home</v-icon>
           <router-link
             :to="{ name: 'TopIndex' }"
             class="nav-link"
@@ -17,6 +18,7 @@
         </v-list-item>
         <template v-if="!authUser">
           <v-list-item>
+            <v-icon>mdi-account</v-icon>
             <router-link
               :to="{ name: 'RegisterIndex' }"
               class="nav-link"
@@ -25,6 +27,7 @@
             </router-link>
           </v-list-item>
           <v-list-item>
+            <v-icon>mdi-login</v-icon>
             <router-link
               :to="{ name: 'LoginIndex' }"
               class="nav-link"
@@ -35,6 +38,7 @@
         </template>
         <template v-else>
           <v-list-item>
+            <v-icon>mdi-cards-heart</v-icon>
             <router-link
               :to="{ name: 'Mypage' }"
               class="nav-link"
@@ -43,6 +47,7 @@
             </router-link>
           </v-list-item>
           <v-list-item>
+            <v-icon>mdi-camera</v-icon>
             <router-link
               :to="{ name: 'Pose' }"
               class="nav-link"
@@ -51,7 +56,8 @@
             </router-link>
           </v-list-item>
           <v-list-item link @click.native="handleLogout">
-            <v-list-item-title>ログアウト</v-list-item-title>
+            <v-icon>mdi-logout</v-icon>
+            <v-list-item-title class="nav-link">ログアウト</v-list-item-title>
           </v-list-item>
         </template>
       </v-list>

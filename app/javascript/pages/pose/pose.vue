@@ -1,12 +1,79 @@
 <template>
   <v-container>
-    <p><strong>{{ countDown }}</strong> 秒キープ！</p>
-    <video ref="video" width="500" height="500" autoplay class="mb-2 mt-2 mx-3"></video>
-    <canvas id="canvas" ref="canvas" width="500" height="500" class="mb-2 mt-4 mx-3"></canvas>
-    <v-row justify="center" class="mb-5">
-      <v-btn class="mx-3" @click="shooting">Start</v-btn>
-      <v-btn class="mx-3" @click="reset">Reset</v-btn>
-      <v-btn class="mx-3" @click="submit">judgment</v-btn>
+    <v-col>
+      <p class="text-center mb-5">
+        カメラに<strong class="bgc">頭〜胸部</strong>が映るようにしてください。全身をカメラに映す必要はありません。
+      <br>
+        <strong class="bgc">華奢に写るポイント</strong>を確認して撮影しましょう！
+      <br>
+        撮影の準備ができたらスタートボタンを押してください。10秒カウントダウンが始まります。
+      </p>
+    </v-col>
+    <v-row
+      dense
+      justify="center"
+      class="mt-5 mb-5"
+    >
+      <v-col
+        cols="12"
+        md="6"
+        lg="6"
+      >
+        <v-card>
+          <v-card-title class="py-2 card-font font-weight-bold">
+            華奢に写るポイント
+          </v-card-title>
+          <v-list
+            v-for="point in points"
+            :key="point.id"
+            class="py-0"
+            dense
+          >
+            <v-list-item>
+              <v-icon
+                class="me-2"
+                color="accent"
+              >
+                mdi-star
+              </v-icon>
+              <span class="text-subtitle-2 card-font font-weight-bold">{{ point.content }}</span>
+            </v-list-item>
+          </v-list>
+        </v-card>
+      </v-col>
+    </v-row>
+    <h1 class="text-center mt-15"><span class="bgc">{{ countDown }} 秒キープ！</span></h1>
+    <v-col class="text-center">
+      <video
+        ref="video"
+        width="500"
+        height="500"
+        autoplay
+        class="mb-2 mt-2 mx-3"
+      >
+      </video>
+      <canvas
+        id="canvas"
+        ref="canvas"
+        width="500"
+        height="500"
+        class="mb-2 mt-2 mx-3"
+      >
+      </canvas>
+    </v-col>
+    <v-row justify="center" class="mt-5 mb-5">
+      <v-btn class="mx-3" @click="shooting" rounded color="primary">
+        <v-icon>mdi-camera</v-icon>
+        スタート
+      </v-btn>
+      <v-btn class="mx-3" @click="reset" rounded color="secondary">
+        <v-icon>mdi-reload</v-icon>
+        リセット
+      </v-btn>
+      <v-btn class="mx-3" @click="submit" rounded color="primary">
+        <v-icon>mdi-fire</v-icon>
+        判定！
+      </v-btn>
     </v-row>
   </v-container>
 </template>
@@ -23,7 +90,17 @@ export default {
       image: null,
       shoulder_width: null,
       countDown: 10,
-      timer: null
+      timer: null,
+      points: [
+        {
+          id: 1,
+          content: '首を長く見せるイメージで、肩をできるだけ下に落とす'
+        },
+        {
+          id: 2,
+          content: '肩をできるだけ落とした状態のまま、肩甲骨をくっつけるイメージで寄せる'
+        }
+      ]
     }
   },
   mounted () {
@@ -90,4 +167,20 @@ export default {
 </script>
 
 <style scoped>
+video {
+  box-shadow: 0 0 0 0.3px;
+  border-style: solod;
+  border-radius: 10px;
+}
+
+canvas {
+  box-shadow: 0 0 0 0.3px;
+  border-style: solod;
+  border-radius: 10px;
+}
+
+.bgc {
+  background: linear-gradient(transparent 60%, #F8BBD0 60%);
+  border-radius: 5px;
+}
 </style>

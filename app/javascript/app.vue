@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <TheHeader />
-    <v-main>
+    <v-main class="bg">
       <router-view />
     </v-main>
     <TheFooter />
@@ -21,4 +21,8 @@ export default {
 </script>
 
 <style scoped>
+.bg {
+  background-image: url('../assets/images/background.jpeg');
+  background-size: cover;
+}
 </style>

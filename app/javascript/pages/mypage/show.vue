@@ -1,12 +1,47 @@
 <template>
   <v-container>
-    <v-col cols="12">
+    <v-col cols="12" class="mt-10 mb-15">
       <template v-if="user.pre_shoot_date">
-        <p>前撮りまであと●日</p>
+        <h1 class="text-center"><span class="bgc">前撮りまであと <strong>{{ diffDate(user.pre_shoot_date ,dateToday) + 1 }}</strong> 日</span></h1>
       </template>
+      <br />
+      <br />
       <template v-if="user.wedding_date">
-        <p>結婚式まであと●日</p>
+        <h1 class="text-center"><span class="bgc">結婚式まであと <strong>{{ diffDate(user.wedding_date ,dateToday) + 1 }} </strong>日</span></h1>
       </template>
+    </v-col>
+
+    <v-col cols="12" class="mb-10">
+      <h2 class="text-center">あなたの記録</h2>
+      <br />
+      <v-row justify="center" class="text-center">
+        <v-card class="card mx-2 my-3">
+          <v-col>
+            <template v-if="purePose.pure_pose">
+              <h3>ありのままのあなた</h3>
+              <p><span class="bgc">肩幅スコア：{{ purePose.pure_pose.pure_shoulder_width }}</span></p>
+              <img :src="purePose.pure_image" />
+            </template>
+            <template v-else>
+              <h3>ありのままのあなた</h3>
+              <p><span class="bgc">肩幅スコア： 登録がありません</span></p>
+            </template>
+          </v-col>
+        </v-card>
+        <v-card class="card mx-2 my-3">
+          <v-col>
+            <template v-if="bestPose.best_pose">
+              <h3>史上最高に華奢なあなた</h3>
+              <p><span class="bgc">肩幅スコア：{{ bestPose.best_pose.shoulder_width }}</span></p>
+              <img :src="bestPose.best_image" />
+            </template>
+            <template v-else>
+              <h3>史上最高に華奢なあなた</h3>
+              <p><span class="bgc">肩幅スコア： まだ登録がありません</span></p>
+            </template>
+          </v-col>
+        </v-card>
+      </v-row>
     </v-col>
 
     <v-col cols="12">
@@ -17,16 +52,18 @@
         >
           <v-btn
             elevation="5"
-            rounded color="pink lighten-2"
+            rounded
+            color="primary"
             class="white--text mb-3"
           >
-            Shooting Start
+            <v-icon>mdi-camera</v-icon>
+            撮影
           </v-btn>
         </router-link>
       </v-row>
     </v-col>
 
-    <v-col cols="12">
+    <v-col cols="12" class="mb-10">
       <template>
         <v-row justify="center">
           <v-dialog
@@ -38,26 +75,23 @@
               <v-btn
                 elevation="5"
                 rounded
-                color="pink lighten-3"
+                color="secondary"
                 class="white--text"
                 v-bind="attrs"
                 v-on="on"
               >
-                Mypage Edit
+                <v-icon>mdi-cards-heart</v-icon>
+                マイページ編集
               </v-btn>
             </template>
             <v-card>
               <v-card-title>
-                <span class="text-h5">Mypage Edit</span>
+                <span class="text-h5">マイページ編集</span>
               </v-card-title>
               <v-card-text>
                 <v-container>
                   <v-row>
-                    <v-col
-                      cols="12"
-                      sm="6"
-                      md="4"
-                    >
+                    <v-col>
                       <validation-observer
                         ref="observer"
                         v-slot="{ invalid }"
@@ -146,20 +180,22 @@
                               </v-menu>
                             </v-col>
                           </v-row>
-                          <v-btn
-                            text
-                            type="submit"
-                            :disabled="invalid"
-                            @click="handleUpdateUser"
-                          >
-                            Update
-                          </v-btn>
-                          <v-btn
-                            text
-                            @click="dialog = false"
-                          >
-                            Close
-                          </v-btn>
+                          <div class="text-center">
+                            <v-btn
+                              text
+                              type="submit"
+                              :disabled="invalid"
+                              @click="handleUpdateUser"
+                            >
+                              更新
+                            </v-btn>
+                            <v-btn
+                              text
+                              @click="dialog = false"
+                            >
+                              閉じる
+                            </v-btn>
+                          </div>
                         </form>
                       </validation-observer>
                     </v-col>
@@ -171,28 +207,17 @@
         </v-row>
       </template>
     </v-col>
-
-    <v-col cols="12">
-      <h2>判定結果</h2>
-      <br />
-      <div>
-        <template v-if="purePose.pure_pose">
-          <img :src="purePose.pure_image" />
-          <h3>{{ purePose.pure_pose.pure_shoulder_width }}</h3>
-        </template>
-      </div>
-      <div>
-        <template v-if="bestPose.best_pose">
-          <img :src="bestPose.best_image" />
-          <h3> {{ bestPose.best_pose.shoulder_width }} </h3>
-        </template>
-      </div>
-    </v-col>
   </v-container>
 </template>
 
 <script>
 import { mapGetters, mapActions } from "vuex"
+import dayjs from "dayjs"
+import timezone from "dayjs/plugin/timezone"
+import utc from "dayjs/plugin/utc"
+
+dayjs.extend(timezone)
+dayjs.extend(utc)
 
 export default {
   name: 'Mypage',
@@ -201,6 +226,7 @@ export default {
       dialog: false,
       ps_menu: null,
       w_menu: null,
+      dateToday: ""
     }
   },
   computed: {
@@ -220,12 +246,18 @@ export default {
       } catch (error) {
         console.log(error);
       }
+    },
+    diffDate: function(target_date, today) {
+      return (dayjs(target_date).diff(today, 'days'))
     }
   },
   created() {
     this.fetchUser(),
     this.fetchPurePose(),
     this.fetchBestPose()
+  },
+  mounted() {
+    this.dateToday = dayjs(new Date()).tz('Asia/Tokyo').format()
   }
 }
 </script>
@@ -233,5 +265,10 @@ export default {
 <style scoped>
 .nav-link {
   text-decoration: none;
+}
+
+.bgc {
+  background: linear-gradient(transparent 60%, #F8BBD0 60%);
+  border-radius: 5px;
 }
 </style>

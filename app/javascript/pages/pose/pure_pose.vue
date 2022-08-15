@@ -1,12 +1,46 @@
 <template>
   <v-container>
-    <p><strong>{{ countDown }}</strong> 秒キープ！</p>
-    <video ref="video" width="500" height="500" autoplay class="mb-2 mt-2 mx-3"></video>
-    <canvas id="canvas" ref="canvas" width="500" height="500" class="mb-2 mt-4 mx-3"></canvas>
-    <v-row justify="center" class="mb-5">
-      <v-btn class="mx-3" @click="shooting">Start</v-btn>
-      <v-btn class="mx-3" @click="reset">Reset</v-btn>
-      <v-btn class="mx-3" @click="submit">Submit</v-btn>
+    <v-col>
+      <p class="text-center">
+        カメラに<strong class="bgc">頭〜胸部</strong>が映るようにしてください。全身をカメラに映す必要はありません。
+      <br>
+        まずは何も意識せず<strong class="bgc">ありのままのあなた</strong>を撮影しましょう！
+      <br>
+        撮影の準備ができたらスタートボタンを押してください。10秒カウントダウンが始まります。
+      </p>
+    </v-col>
+    <h1 class="text-center mt-15"><span class="bgc">{{ countDown }} 秒キープ！</span></h1>
+    <v-col class="text-center">
+      <video
+        ref="video"
+        width="500"
+        height="500"
+        autoplay 
+        class="mb-2 mt-2 mx-3"
+      >
+      </video>
+      <canvas
+        id="canvas"
+        ref="canvas"
+        width="500"
+        height="500"
+        class="mb-2 mt-2 mx-3"
+      >
+      </canvas>
+    </v-col>
+    <v-row justify="center" class="mt-5 mb-5">
+      <v-btn class="mx-3" @click="shooting" rounded color="primary">
+        <v-icon>mdi-camera</v-icon>
+        スタート
+      </v-btn>
+      <v-btn class="mx-3" @click="reset" rounded color="secondary">
+        <v-icon>mdi-reload</v-icon>
+        リセット
+      </v-btn>
+      <v-btn class="mx-3" @click="submit" rounded color="primary">
+        <v-icon>mdi-account-plus</v-icon>
+        ありのままのあなたを登録
+      </v-btn>
     </v-row>
   </v-container>
 </template>
@@ -96,4 +130,19 @@ export default {
 </script>
 
 <style scoped>
+video {
+  box-shadow: 0 0 0 0.3px;
+  border-style: solod;
+  border-radius: 10px;
+}
+canvas {
+  box-shadow: 0 0 0 0.3px;
+  border-style: solod;
+  border-radius: 10px;
+}
+
+.bgc {
+  background: linear-gradient(transparent 60%, #F8BBD0 60%);
+  border-radius: 5px;
+}
 </style>
