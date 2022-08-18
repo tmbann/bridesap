@@ -2,7 +2,7 @@
   <v-container>
     <v-col>
       <p class="text-center">
-        カメラに<strong class="bgc">頭〜胸部</strong>が映るようにしてください。全身をカメラに映す必要はありません。
+        カメラに<strong class="bgc">頭頂部〜胸部</strong>が映るようにしてください。全身をカメラに映す必要はありません。
       <br>
         まずは何も意識せず<strong class="bgc">ありのままのあなた</strong>を撮影しましょう！
       <br>
@@ -10,24 +10,33 @@
       </p>
     </v-col>
     <h1 class="text-center mt-15"><span class="bgc">{{ countDown }} 秒キープ！</span></h1>
-    <v-col class="text-center">
-      <video
-        ref="video"
-        width="500"
-        height="500"
-        autoplay 
-        class="mb-2 mt-2 mx-3"
-      >
-      </video>
-      <canvas
-        id="canvas"
-        ref="canvas"
-        width="500"
-        height="500"
-        class="mb-2 mt-2 mx-3"
-      >
-      </canvas>
-    </v-col>
+    <v-row justify="center">
+      <v-col>
+        <v-card class="mt-3 text-center">
+          <video
+            ref="video"
+            width="500"
+            height="500"
+            autoplay 
+            class="mb-2 mt-2 mx-3"
+          >
+          </video>
+        </v-card>
+      </v-col>
+
+      <v-col>
+        <v-card class="mt-3 text-center">
+          <canvas
+            id="canvas"
+            ref="canvas"
+            width="500"
+            height="500"
+            class="mb-2 mt-2 mx-3"
+          >
+          </canvas>
+        </v-card>
+      </v-col>
+    </v-row>
     <v-row justify="center" class="mt-5 mb-5">
       <v-btn class="mx-3" @click="shooting" rounded color="primary">
         <v-icon>mdi-camera</v-icon>
@@ -130,17 +139,6 @@ export default {
 </script>
 
 <style scoped>
-video {
-  box-shadow: 0 0 0 0.3px;
-  border-style: solod;
-  border-radius: 10px;
-}
-canvas {
-  box-shadow: 0 0 0 0.3px;
-  border-style: solod;
-  border-radius: 10px;
-}
-
 .bgc {
   background: linear-gradient(transparent 60%, #F8BBD0 60%);
   border-radius: 5px;

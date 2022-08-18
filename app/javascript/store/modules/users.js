@@ -9,7 +9,7 @@ const state = {
 const getters = {
   authUser: state => state.authUser,
   user: state => state.user,
-  registeringUserId: state => state.registeringUserId 
+  registeringUserId: state => state.registeringUserId
 }
 
 const mutations = {
@@ -60,10 +60,9 @@ const actions = {
       return null
     }
   },
-  registerUser({ commit }, user) {
-    axios.post('users', {user})
-      .then(res => { commit('setRegisteringUserID', res.data.id)})
-      .catch(err => console.log(err.response))
+  async registerUser({ commit }, user) {
+    const registerResponse = await axios.post('users', { user: user})
+    commit('setRegisteringUserID', registerResponse.data.id)
   },
   fetchUser({ commit }) {
     axios.get('mypage')

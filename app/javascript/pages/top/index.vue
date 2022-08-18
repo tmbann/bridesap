@@ -53,7 +53,7 @@
               登録
             </v-btn>
           </router-link>
-          <p class="subheading font-weight-regular red--text mt-3">
+          <p class="subheading font-weight-regular pink--text mt-3">
             まずはユーザー登録から
           </p>
         </template>
@@ -83,7 +83,7 @@ export default {
       cards: [
         {
           title: 'ありのままのあなたを撮影',
-          text: 'ユーザー情報を登録後、まずはありのままの姿勢で撮影。現状を把握しましょう。ありのままのあなたを撮影できるのはユーザー登録時のみです。'
+          text: 'ユーザー情報を登録後、まずは何も意識せずに、ありのままの姿勢で撮影。ありのままのあなたを撮影できるのはユーザー登録時のみです。'
         },
         {
           title: 'ポイント確認＆撮影',
