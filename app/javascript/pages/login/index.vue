@@ -5,39 +5,41 @@
     </h1>
     <validation-observer
       ref="observer"
-      v-slot="{ invalid }"
+      v-slot="ObserverProps"
     >
       <form @submit.prevent="submit">
         <validation-provider
-          v-slot="{ errors }"
           name="メールアドレス"
           rules="required|email"
         >
-          <v-text-field
-            v-model="user.email"
-            :error-messages="errors"
-            label="メールアドレス"
-            required
-          ></v-text-field>
+          <div slot-scope="ProviderProps">
+            <v-text-field
+              v-model="user.email"
+              label="メールアドレス"
+              required
+            ></v-text-field>
+            <span class="pink--text">{{ ProviderProps.errors[0] }}</span>
+          </div>
         </validation-provider>
 
         <validation-provider
-          v-slot="{ errors }"
           name="パスワード"
           rules="required|min:8"
         >
-          <v-text-field
-            v-model="user.password"
-            :error-messages="errors"
-            label="パスワード"
-            required
-          ></v-text-field>
+          <div slot-scope="ProviderProps">
+            <v-text-field
+              v-model="user.password"
+              label="パスワード"
+              required
+            ></v-text-field>
+            <span class="pink--text">{{ ProviderProps.errors[0] }}</span>
+          </div>
         </validation-provider>
       
         <v-btn
           class="mr-4"
           type="submit"
-          :disabled="invalid"
+          :disabled="ObserverProps.invalid || !ObserverProps.validated"
           @click="login"
           rounded
           color="primary"
@@ -45,6 +47,7 @@
           <v-icon>mdi-login</v-icon>
           ログイン
         </v-btn>
+        <p class="pink--text text-center mt-5">{{ errorMessage }}</p>
       </form>
     </validation-observer>
     <br />
@@ -67,7 +70,8 @@ export default {
       user: {
         email: '',
         password: ''
-      }
+      },
+      errorMessage: ""
     }
   },
   methods: {
@@ -80,7 +84,12 @@ export default {
         await this.loginUser(this.user);
         this.$router.push({ name: 'Mypage' })
       }catch(error) {
-        console.log(error);
+        console.log(error)
+        this.errorMessage = error.response.data.errors.detail
+        this.$store.dispatch("setFlash", {
+          type: "error",
+          message: "ログインできませんでした"
+        })
       }
     },
     submit () {

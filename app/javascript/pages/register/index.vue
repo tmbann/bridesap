@@ -5,67 +5,71 @@
     </h1>
     <validation-observer
       ref="observer"
-      v-slot="{ invalid }"
+      v-slot="ObserverProps"
     >
       <form @submit.prevent="submit">
         <validation-provider
-          v-slot="{ errors }"
           name="ニックネーム"
           rules="required"
         >
-          <v-text-field
-            v-model="user.name"
-            :error-messages="errors"
-            label="ニックネーム"
-            required
-          ></v-text-field>
+          <div slot-scope="ProviderProps">
+            <v-text-field
+              v-model="user.name"
+              label="ニックネーム"
+              required
+            ></v-text-field>
+            <span class="pink--text">{{ ProviderProps.errors[0] }}</span>
+          </div>
         </validation-provider>
 
         <validation-provider
-          v-slot="{ errors }"
           name="メールアドレス"
           rules="required|email"
         >
-          <v-text-field
-            v-model="user.email"
-            :error-messages="errors"
-            label="メールアドレス"
-            required
-          ></v-text-field>
+          <div slot-scope="ProviderProps">
+            <v-text-field
+              v-model="user.email"
+              label="メールアドレス"
+              required
+            ></v-text-field>
+            <span class="pink--text">{{ ProviderProps.errors[0] }}</span>
+          </div>
         </validation-provider>
 
         <validation-provider
-          v-slot="{ errors }"
           name="パスワード"
           rules="required"
         >
-          <v-text-field
-            id="password"
-            v-model="user.password"
-            :error-messages="errors"
-            label="パスワード"
-            required
-          ></v-text-field>
+          <div slot-scope="ProviderProps">
+            <v-text-field
+              id="password"
+              v-model="user.password"
+              label="パスワード"
+              required
+            ></v-text-field>
+            <span class="pink--text">{{ ProviderProps.errors[0] }}</span>
+          </div>
         </validation-provider>
 
         <validation-provider
-          v-slot="{ errors }"
           name="password_confirmation"
           rules="required|min:8|password_confirmed:@パスワード"
         >
-          <v-text-field
-            v-model="user.password_confirmation"
-            :error-messages="errors"
-            label="パスワード（確認）"
-            required
-          ></v-text-field>
+          <div slot-scope="ProviderProps">
+            <v-text-field
+              v-model="user.password_confirmation"
+              label="パスワード（確認）"
+              required
+            ></v-text-field>
+            <span class="pink--text">{{ ProviderProps.errors[0] }}</span>
+          </div>
         </validation-provider>
       
         <v-row>
           <v-col>
             <template>
               <div>
-                <div class="mb-6">任意項目: <code>{{ activePicker || '現在未選択です' }}</code></div>
+                <div class="mb-6">以下は任意項目です。: <code>{{ activePicker || '現在未選択です' }}</code></div>
                 <v-menu
                   ref="ps_menu"
                   v-model="ps_menu"
@@ -100,7 +104,7 @@
           <v-col>
             <template>
               <div>
-                <div class="mb-6">任意項目: <code>{{ activePicker || '現在未選択です' }}</code></div>
+                <div class="mb-6">以下は任意項目です。: <code>{{ activePicker || '現在未選択です' }}</code></div>
                 <v-menu
                   ref="w_menu"
                   v-model="w_menu"
@@ -135,7 +139,7 @@
         <v-btn
           class="mt-5"
           type="submit"
-          :disabled="invalid"
+          :disabled="ObserverProps.invalid || !ObserverProps.validated"
           @click="register"
           rounded
           color="primary"
@@ -143,6 +147,7 @@
           <v-icon>mdi-account</v-icon>
           登録＆ありのままのあなたを撮影
         </v-btn>
+        <p class="pink--text text-center mt-5">{{ errorMessage }}</p>
       </form>
     </validation-observer>
   </v-container>
@@ -165,7 +170,8 @@ export default {
       },
       ps_menu: false,
       w_menu: false,
-      activePicker: null
+      activePicker: null,
+      errorMessage: ''
     }
   },
   watch: {
@@ -182,8 +188,18 @@ export default {
       this.$refs.observer.validate()
     },
     async register() {
-      await this.registerUser(this.user)
-      this.$router.push({ name: 'PurePose' })
+      try {
+        await
+          this.registerUser(this.user)
+          this.$router.push({ name: 'PurePose' })
+      } catch (error) {
+        console.log(error.response);
+        this.errorMessage = error.response.data.errors.detail;
+        this.$store.dispatch("setFlash", {
+          type: "error",
+          message: "登録できませんでした"
+        })
+      } 
     },
     ps_save (date) {
       this.$refs.ps_menu.save(date)

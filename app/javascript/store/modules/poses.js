@@ -27,7 +27,7 @@ const mutations = {
 const actions = {
   async createPose({ commit }, poseData) {
     const res = await axios.post('poses', poseData)
-    commit('setPose', res.data) //res.data.result.score とかで取得できる
+    commit('setPose', res.data)
     console.log(res.data)
   },
   fetchPurePose({ commit }) {
