@@ -20,6 +20,7 @@ gem 'jbuilder', '~> 2.7'
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 gem 'sorcery'
+gem 'config'
 
 # Use Active Storage variant
 gem 'image_processing', '~> 1.2'
@@ -40,6 +41,7 @@ group :development, :test do
   gem 'rubocop', require:false
   gem 'rubocop-rails', require:false
   gem 'pg', '~> 1.1'
+  gem 'letter_opener_web'
 end
 
 group :development do

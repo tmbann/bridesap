@@ -52,11 +52,22 @@
     </validation-observer>
     <br />
     <br />
-    <router-link
-      :to="{ name: 'RegisterIndex' }"
-    >
-      <v-list-item-title>ユーザー登録はこちら</v-list-item-title>
-    </router-link>
+    <p class="text-center my-3">
+      ユーザー登録は
+      <router-link
+        :to="{ name: 'RegisterIndex' }"
+      >
+        こちら
+      </router-link>
+    </p>
+    <p class="text-center my-3">
+      パスワードをお忘れの方は
+      <router-link
+        :to="{ name: 'ResetPasswordNew' }"
+      >
+        こちら
+      </router-link>
+    </p>
   </v-container>
 </template>
 

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
   root to: 'home#index'
   namespace :api do
     resources :sessions
@@ -10,6 +11,7 @@ Rails.application.routes.draw do
     resources :poses
     resources :pure_poses
     resource :mypage
+    resources :password_resets, only: %i[create edit update], params: :token
   end
 
   get '*path', to: 'home#index'
