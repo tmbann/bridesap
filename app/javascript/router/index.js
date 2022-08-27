@@ -61,7 +61,7 @@ const router = new Router({
       name: 'ResetPasswordNew'
     },
     {
-      path: '/password_resets/edit',
+      path: '/password/edit',
       component: ResetPasswordEdit,
       name: 'ResetPasswordEdit'
     }
