@@ -9,6 +9,8 @@ import Mypage from "../pages/mypage/show"
 import Pose from "../pages/pose/pose"
 import PurePose from "../pages/pose/pure_pose"
 import Result from "../pages/result/index"
+import ResetPasswordNew from "../pages/reset_password/ResetPasswordNew"
+import ResetPasswordEdit from "../pages/reset_password/ResetPasswordEdit"
 
 Vue.use(Router)
 
@@ -52,6 +54,16 @@ const router = new Router({
       component: Result,
       name: 'Result',
       meta: { requiredAuth: true }
+    },
+    {
+      path: '/password_resets',
+      component: ResetPasswordNew,
+      name: 'ResetPasswordNew'
+    },
+    {
+      path: '/password_resets/edit',
+      component: ResetPasswordEdit,
+      name: 'ResetPasswordEdit'
     }
   ],
 })

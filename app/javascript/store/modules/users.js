@@ -61,7 +61,7 @@ const actions = {
     }
   },
   async registerUser({ commit }, user) {
-    const registerResponse = await axios.post('users', { user: user})
+    const registerResponse = await axios.post('users', {user: user})
     commit('setRegisteringUserID', registerResponse.data.id)
   },
   fetchUser({ commit }) {

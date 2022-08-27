@@ -38,7 +38,7 @@
 
         <validation-provider
           name="パスワード"
-          rules="required"
+          rules="required|min:8"
         >
           <div slot-scope="ProviderProps">
             <v-text-field
