@@ -14,7 +14,7 @@
           お問い合わせ
         </v-card-title>
         <v-card-text class="text-subtitle-2 font-weight-bold py-1">
-          <p>Bridesapに関するお問い合わせ、不具合の報告などございましたら、以下のTwitterアカウントまでご連絡ください。</p>
+          <p>BRIDESAPに関するお問い合わせ、不具合の報告などございましたら、以下のTwitterアカウントまでご連絡ください。</p>
           <span>ご感想もお待ちしております！</span> 
         </v-card-text>
 
