@@ -1,9 +1,35 @@
 <template>
   <v-footer padless color="pink lighten-4">
     <v-row justify="center" no-gutters>
-      <v-btn text rounded class="my-2 mx-8 white--text">利用規約</v-btn>
-      <v-btn text rounded class="my-2 mx-8 white--text">プライバシーポリシー</v-btn>
-      <v-btn text rounded class="my-2 mx-8 white--text">お問い合わせ</v-btn>
+      <v-col 
+        v-for="link in links"
+        :key="link.name"
+        cols="11"
+        md="4"
+        lg="3"
+        xl="2"
+      >
+        <v-list
+          dense
+          class="pt-0"
+          color="pink lighten-4"
+          shaped
+        >
+          <v-list-item
+            class="mx-10"
+            :to="link.to"
+          >
+            <v-list-item-title class="white--text font-weight-bold">
+              {{ link.name }}
+            </v-list-item-title>
+            <v-icon 
+              color="white"
+            >
+              mdi-chevron-right
+            </v-icon>
+          </v-list-item>
+        </v-list>
+      </v-col>
       <v-col class="py-4 text-center white--text" cols="12">©{{ new Date().getFullYear() }} BRIDESAP</v-col>
     </v-row>
   </v-footer>
@@ -11,7 +37,16 @@
 
 <script>
 export default {
-  name: 'TheFooter'
+  name: 'TheFooter',
+  data() {
+    return {
+      links: [
+        { name: '利用規約', to: {name: 'TheTerms'} },
+//        { name: 'プライバシーポリシー', to: {name: 'ThePolicy'} },
+//        { name: 'お問い合わせ', to: {name: 'TheContact'} }
+      ]
+    }
+  }
 }
 </script>
 

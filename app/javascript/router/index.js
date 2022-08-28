@@ -11,6 +11,7 @@ import PurePose from "../pages/pose/pure_pose"
 import Result from "../pages/result/index"
 import ResetPasswordNew from "../pages/reset_password/ResetPasswordNew"
 import ResetPasswordEdit from "../pages/reset_password/ResetPasswordEdit"
+import TheTerms from "../pages/shared/TheTerms"
 
 Vue.use(Router)
 
@@ -64,6 +65,11 @@ const router = new Router({
       path: '/password/edit',
       component: ResetPasswordEdit,
       name: 'ResetPasswordEdit'
+    },
+    {
+      path: '/terms',
+      component: TheTerms,
+      name: 'TheTerms'
     }
   ],
 })
