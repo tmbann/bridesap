@@ -30,7 +30,7 @@
           </v-list-item>
         </v-list>
       </v-col>
-      <v-col class="py-4 text-center white--text" cols="12">©{{ new Date().getFullYear() }} BRIDESAP</v-col>
+      <v-col class="py-4 text-center white--text" cols="12">©{{ new Date().getFullYear() }} Bridesap</v-col>
     </v-row>
   </v-footer>
 </template>
@@ -43,7 +43,7 @@ export default {
       links: [
         { name: '利用規約', to: {name: 'TheTerms'} },
         { name: 'プライバシーポリシー', to: {name: 'ThePolicy'} },
-//        { name: 'お問い合わせ', to: {name: 'TheContact'} }
+        { name: 'お問い合わせ', to: {name: 'TheContact'} }
       ]
     }
   }
