@@ -12,6 +12,7 @@ import Result from "../pages/result/index"
 import ResetPasswordNew from "../pages/reset_password/ResetPasswordNew"
 import ResetPasswordEdit from "../pages/reset_password/ResetPasswordEdit"
 import TheTerms from "../pages/shared/TheTerms"
+import ThePolicy from "../pages/shared/ThePolicy"
 
 Vue.use(Router)
 
@@ -70,6 +71,11 @@ const router = new Router({
       path: '/terms',
       component: TheTerms,
       name: 'TheTerms'
+    },
+    {
+      path: '/policy',
+      component: ThePolicy,
+      name: 'ThePolicy'
     }
   ],
 })
