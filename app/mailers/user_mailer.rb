@@ -8,6 +8,6 @@ class UserMailer < ApplicationMailer
   def reset_password_email(user)
     @user = User.find(user.id)
     @url = "#{Settings.site.top_url}password/edit?token=#{user&.reset_password_token}"
-    mail(to: user.email, subject: '【Bridesap】パスワードリセット')
+    mail(to: user.email, subject: '【BRIDESAP】パスワードリセット')
   end
 end

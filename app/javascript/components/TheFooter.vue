@@ -30,7 +30,7 @@
           </v-list-item>
         </v-list>
       </v-col>
-      <v-col class="py-4 text-center white--text" cols="12">©{{ new Date().getFullYear() }} Bridesap</v-col>
+      <v-col class="py-4 text-center white--text font-weight-bold" cols="12">©{{ new Date().getFullYear() }} BRIDESAP</v-col>
     </v-row>
   </v-footer>
 </template>
