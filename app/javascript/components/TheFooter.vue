@@ -42,7 +42,7 @@ export default {
     return {
       links: [
         { name: '利用規約', to: {name: 'TheTerms'} },
-//        { name: 'プライバシーポリシー', to: {name: 'ThePolicy'} },
+        { name: 'プライバシーポリシー', to: {name: 'ThePolicy'} },
 //        { name: 'お問い合わせ', to: {name: 'TheContact'} }
       ]
     }
