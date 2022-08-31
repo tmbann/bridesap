@@ -1,5 +1,6 @@
 class Api::MypagesController < ApplicationController
   before_action :authenticate!
+  skip_before_action :require_login
   before_action :set_user
 
   def show
@@ -17,7 +18,7 @@ class Api::MypagesController < ApplicationController
   private
 
   def set_user
-    @user = User.find(current_user.id)
+    @user = User.find(login_user.id)
   end
 
   def user_params

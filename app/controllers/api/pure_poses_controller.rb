@@ -1,6 +1,8 @@
 class Api::PurePosesController < ApplicationController
+  skip_before_action :require_login
+
   def index
-    @pure_pose = PurePose.find_by(user_id: current_user.id)
+    @pure_pose = PurePose.find_by(user_id: login_user.id)
     if @pure_pose
       @pure_pose.image = encode_base64(@pure_pose.pure_pose_image)
       render json: { "pure_pose" => @pure_pose,

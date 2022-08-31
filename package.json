@@ -9,6 +9,7 @@
     "@rails/webpacker": "5.4.3",
     "axios": "^0.27.2",
     "dayjs": "^1.11.4",
+    "rails_admin": "3.0.0",
     "vee-validate": "^3.2.5",
     "vue": "^2.6.11",
     "vue-loader": "^15.8.3",
