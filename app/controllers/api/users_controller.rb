@@ -1,5 +1,6 @@
 class Api::UsersController < ApplicationController
   before_action :authenticate!, only: %i[me]
+  skip_before_action :require_login
 
   def create
     @user = User.new(user_params)
@@ -12,7 +13,7 @@ class Api::UsersController < ApplicationController
   end
 
   def me
-    render json: current_user
+    render json: login_user
   end
 
   private
