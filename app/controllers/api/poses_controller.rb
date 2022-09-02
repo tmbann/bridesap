@@ -4,7 +4,8 @@ class Api::PosesController < ApplicationController
 
   def index
     @best_pose = login_user.poses.all.order(shoulder_width: :asc).first # @pose保存前の最小値を取得
-    if @best_pose
+    @pure_pose = PurePose.find_by(user_id: login_user.id)
+    if @best_pose && @pure_pose.pure_shoulder_width > @best_pose.shoulder_width
       @best_pose.image = encode_base64(@best_pose.pose_image)
       render json: { "best_pose" => @best_pose,
                      "best_image" => @best_pose.image

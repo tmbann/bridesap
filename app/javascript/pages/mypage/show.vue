@@ -37,7 +37,7 @@
             </template>
             <template v-else>
               <h3>史上最高に華奢なあなた</h3>
-              <p><span class="bgc">肩幅スコア： まだ登録がありません</span></p>
+              <p><span class="bgc">肩幅スコア： まだ華奢になっていません</span></p>
             </template>
           </v-col>
         </v-card>
