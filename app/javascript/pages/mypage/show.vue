@@ -2,12 +2,34 @@
   <v-container>
     <v-col cols="12" class="mt-10 mb-15">
       <template v-if="user.pre_shoot_date">
-        <h1 class="text-center"><span class="bgc">前撮りまであと <strong>{{ diffDate(user.pre_shoot_date ,dateToday) + 1 }}</strong> 日</span></h1>
+        <h1 class="text-center">
+          <span class="bgc">
+            前撮りまであと
+            <template v-if="diffDate(user.pre_shoot_date ,dateToday) <= 0">
+              <strong>0</strong>
+            </template>
+            <template v-else>
+              <strong>{{ diffDate(user.pre_shoot_date ,dateToday) + 1 }}</strong>
+            </template>
+            日
+          </span>
+        </h1>
       </template>
       <br />
       <br />
       <template v-if="user.wedding_date">
-        <h1 class="text-center"><span class="bgc">結婚式まであと <strong>{{ diffDate(user.wedding_date ,dateToday) + 1 }} </strong>日</span></h1>
+        <h1 class="text-center">
+          <span class="bgc">
+            結婚式まであと
+            <template v-if="diffDate(user.wedding_date ,dateToday) <= 0">
+              <strong>0</strong>
+            </template>
+            <template v-else>
+              <strong>{{ diffDate(user.wedding_date ,dateToday) + 1 }} </strong>
+            </template>
+            日
+          </span>
+        </h1>
       </template>
     </v-col>
 
