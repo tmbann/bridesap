@@ -2,6 +2,7 @@
   <v-app>
     <TheHeader />
     <v-main class="bg">
+      <TheFlashMessage v-if="isFlash" />
       <router-view />
     </v-main>
     <TheFooter />
@@ -11,11 +12,17 @@
 <script>
 import TheHeader from "./components/TheHeader.vue";
 import TheFooter from "./components/TheFooter.vue";
+import TheFlashMessage from "./components/TheFlashMessage.vue";
+import { mapGetters } from "vuex";
 
 export default {
   components: {
     TheHeader,
-    TheFooter
+    TheFooter,
+    TheFlashMessage
+  },
+  computed: {
+    ...mapGetters(["isFlash"])
   }
 }
 </script>

@@ -137,6 +137,10 @@ export default {
           this.$axios.post('pure_poses', formData)
           .then(res => {
             this.isLoading = false
+            this.$store.dispatch("setFlash", {
+              type: "success",
+              message: "登録しました",
+            });
             this.$router.push({ name: 'LoginIndex' })
           })
         }
