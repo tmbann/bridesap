@@ -38,17 +38,23 @@
       </v-col>
     </v-row>
     <v-row justify="center" class="mt-5 mb-5">
-      <v-btn class="mx-3" @click="shooting" rounded color="primary">
+      <v-btn color="primary" rounded class="mx-3" :disabled="isLoading" @click="shooting">
         <v-icon>mdi-camera</v-icon>
         スタート
       </v-btn>
-      <v-btn class="mx-3" @click="reset" rounded color="secondary">
+      <v-btn color="secondary" rounded class="mx-3" :disabled="isLoading" @click="reset">
         <v-icon>mdi-reload</v-icon>
         リセット
       </v-btn>
-      <v-btn class="mx-3" @click="submit" rounded color="primary">
+      <v-btn color="primary" rounded class="mx-3" :loading="isLoading" :disabled="isLoading" @click="submit">
         <v-icon>mdi-account-plus</v-icon>
         ありのままのあなたを登録
+        <template v-slot:loader>
+          <span>登録中…</span>
+          <span class="custom-loader">
+            <v-icon>mdi-sync</v-icon>
+          </span>
+        </template>
       </v-btn>
     </v-row>
   </v-container>
@@ -66,7 +72,8 @@ export default {
       image: null,
       pure_shoulder_width: null,
       countDown: 10,
-      timer: null
+      timer: null,
+      isLoading: false
     }
   },
   mounted () {
@@ -106,6 +113,8 @@ export default {
       this.canvas.getContext('2d').clearRect(0, 0, 500, 500)
     },
     submit() {
+      this.isLoading = true
+
       const purePoses = async() => {
         const detector = await poseDetection.createDetector(poseDetection.SupportedModels.MoveNet)
         const imageElement = document.getElementById('canvas')
@@ -127,7 +136,7 @@ export default {
       
           this.$axios.post('pure_poses', formData)
           .then(res => {
-            console.log(res.data)
+            this.isLoading = false
             this.$router.push({ name: 'LoginIndex' })
           })
         }
@@ -142,5 +151,41 @@ export default {
 .bgc {
   background: linear-gradient(transparent 60%, #F8BBD0 60%);
   border-radius: 5px;
+}
+.custom-loader {
+  animation: loader 1s infinite;
+  display: flex;
+}
+@-moz-keyframes loader {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes loader {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@-o-keyframes loader {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes loader {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 </style>

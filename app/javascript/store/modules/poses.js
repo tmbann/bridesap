@@ -28,7 +28,6 @@ const actions = {
   async createPose({ commit }, poseData) {
     const res = await axios.post('poses', poseData)
     commit('setPose', res.data)
-    console.log(res.data)
   },
   fetchPurePose({ commit }) {
     axios.get('pure_poses')
