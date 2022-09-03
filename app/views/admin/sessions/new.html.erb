@@ -1,30 +1,32 @@
-<div class="min-h-screen bg-purple-100 flex flex-col justify-center items-center">
+<div class="login-page">
+  <h1>管理者用ログイン</h1>
   <% if flash.present?  %>
     <% flash.each do |type, message| %>
-      <div class="subtitle text-red-500">
+      <div class="flash-message">
         <%= message %>
       </div>
     <% end %>
   <% end %>
-  <h1 class="text-3xl font-bold text-center mb-4">管理者用ログイン</h1>
-	<div class="py-12 px-12 bg-white rounded-2xl shadow-xl z-20">
-		<div>
-      <%= form_with url: admin_sessions_path, methods: :post, class:"box", local: true do |f| %>
-        <div class="field mb-5">
-          <%= f.label :メールアドレス, class:"label" %>
-          <%= f.email_field :email, class:"block text-sm py-3 px-4 rounded-lg w-full border outline-none"  %>
+	<div class="form">
+		<div class="form-inner">
+      <%= form_with url: admin_sessions_path, methods: :post, local: true do |f| %>
+        <div class="form-email">
+          <%= f.label :メールアドレス, class:"label" %><br />
+          <%= f.email_field :email %>
         </div>
-        <div class="field mb-8">
+        <div class="form-password">
           <%= f.label :パスワード, class:"label" %>
-          <%= f.password_field :password, class:"block text-sm py-3 px-4 rounded-lg w-full border outline-none" %>
+          <%= f.password_field :password %>
         </div>
-        <div class="field">
-          <%= f.submit "ログイン", class:"button py-3 w-64 text-xl text-white bg-purple-400 rounded-2xl" %>
+        <div class="form-login">
+          <%= f.submit "ログイン" %>
         </div>
       <%end%>
     </div>
   </div>
-  <div class="field mt-8">
-    <%= link_to "ログアウト", admin_logout_path, method: :delete, class: 'button p-3 w-64 text-xl text-white bg-red-400 rounded-2xl' %>
-  </div>
+  <!--
+    <div>
+      <%= link_to "ログアウト", admin_logout_path, method: :delete %>
+    </div>
+  -->
 </div>
