@@ -47,10 +47,10 @@ Tensorflow.js
 ##### バックエンド
 Ruby 3.1.2  
 Rails 6.1.6  
-　主要Gem
+　主要Gem  
 　└sorcery  
-　└meta-tags
-　└rails-admin
+　└meta-tags  
+　└rails-admin  
 　└cancancan
 
 ##### インフラ
