@@ -1,5 +1,5 @@
 default_url_options:
   protcol: "https"
-  host: "bridesap.herokuapp.com"
+  host: "www.bridesap.com"
 site:
-  top_url: "https://bridesap.herokuapp.com/"
+  top_url: "https://www.bridesap.com/"
