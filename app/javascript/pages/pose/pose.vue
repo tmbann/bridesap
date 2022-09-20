@@ -51,6 +51,7 @@
             width="500"
             height="500"
             autoplay
+            playsinline
             class="mb-2 mt-2 mx-3"
           >
           </video>
@@ -119,6 +120,20 @@ export default {
       isLoading: false
     }
   },
+  //computed: {
+  //  width () {
+  //    switch (this.$vuetify.breakpoint.name) {
+  //      case 'xs': return 300
+  //      case 'md': return 500
+  //    } 
+  //  },
+  //  height () {
+  //    switch (this.$vuetify.breakpoint.name) {
+  //      case 'xs': return 300
+  //      case 'md': return 500
+  //    }
+  //  }
+  //},
   mounted () {
     this.video = this.$refs.video
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {

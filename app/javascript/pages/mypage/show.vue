@@ -37,7 +37,7 @@
       <h2 class="text-center">あなたの記録</h2>
       <br />
       <v-row justify="center" class="text-center">
-        <v-card class="card mx-2 my-3">
+        <v-card class="card mx-2 my-3" min-width="525">
           <v-col>
             <template v-if="purePose.pure_pose">
               <h3>ありのままのあなた</h3>
@@ -50,7 +50,7 @@
             </template>
           </v-col>
         </v-card>
-        <v-card class="card mx-2 my-3">
+        <v-card class="card mx-2 my-3" min-width="525">
           <v-col>
             <template v-if="bestPose.best_pose">
               <h3>史上最高に華奢なあなた</h3>

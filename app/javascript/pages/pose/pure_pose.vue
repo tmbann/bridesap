@@ -17,7 +17,8 @@
             ref="video"
             width="500"
             height="500"
-            autoplay 
+            autoplay
+            playsinline
             class="mb-2 mt-2 mx-3"
           >
           </video>
