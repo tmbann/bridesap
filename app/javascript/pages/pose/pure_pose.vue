@@ -15,8 +15,8 @@
         <v-card class="mt-3 text-center">
           <video
             ref="video"
-            width="500"
-            height="500"
+            width="300"
+            height="300"
             autoplay
             playsinline
             class="mb-2 mt-2 mx-3"
@@ -30,8 +30,8 @@
           <canvas
             id="canvas"
             ref="canvas"
-            width="500"
-            height="500"
+            width="300"
+            height="300"
             class="mb-2 mt-2 mx-3"
           >
           </canvas>
@@ -79,8 +79,15 @@ export default {
   },
   mounted () {
     this.video = this.$refs.video
+    const constraints = {
+      video: {
+        width: 300,
+        height: 300,
+      }
+    };
+
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-      navigator.mediaDevices.getUserMedia({ video: true }).then(stream => {
+      navigator.mediaDevices.getUserMedia(constraints).then(stream => {
         this.video.srcObject = stream
         this.video.play()
       })
@@ -95,7 +102,7 @@ export default {
         inst.canvas = inst.$refs.canvas
         // canvas.getContext('2d')でcanvasを2Dグラフィックを描画するためのメソッドやプロパティをもつオブジェクトにする
         // drawImageは<canvas> 要素の二次元文脈に於いて、任意の位置に任意の画像類を貼付けるメソッド
-        inst.canvas.getContext('2d').drawImage(inst.video, 0, 60, 500, 380)
+        inst.canvas.getContext('2d').drawImage(inst.video, 0, 0, 300, 300)
         inst.image = inst.canvas.toDataURL('image/jpeg')
       }
       const countDownTimer = function(inst){
