@@ -31,6 +31,9 @@
               v-model="user.password"
               label="パスワード"
               required
+              :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
+              :type="show ? 'text' : 'password'"
+              @click:append="show = !show"
             ></v-text-field>
             <span class="pink--text">{{ ProviderProps.errors[0] }}</span>
           </div>
@@ -82,7 +85,8 @@ export default {
         email: '',
         password: ''
       },
-      errorMessage: ""
+      errorMessage: "",
+      show: false
     }
   },
   methods: {

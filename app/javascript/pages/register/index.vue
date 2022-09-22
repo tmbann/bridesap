@@ -46,13 +46,16 @@
               v-model="user.password"
               label="パスワード"
               required
+              :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+              :type="show1 ? 'text' : 'password'"
+              @click:append="show1 = !show1"
             ></v-text-field>
             <span class="pink--text">{{ ProviderProps.errors[0] }}</span>
           </div>
         </validation-provider>
 
         <validation-provider
-          name="password_confirmation"
+          name="パスワード（確認）"
           rules="required|min:8|password_confirmed:@パスワード"
         >
           <div slot-scope="ProviderProps">
@@ -60,6 +63,9 @@
               v-model="user.password_confirmation"
               label="パスワード（確認）"
               required
+              :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
+              :type="show2 ? 'text' : 'password'"
+              @click:append="show2 = !show2"
             ></v-text-field>
             <span class="pink--text">{{ ProviderProps.errors[0] }}</span>
           </div>
@@ -171,7 +177,9 @@ export default {
       ps_menu: false,
       w_menu: false,
       activePicker: null,
-      errorMessage: ''
+      errorMessage: '',
+      show1: false,
+      show2: false
     }
   },
   watch: {
