@@ -44,7 +44,8 @@ const router = new Router({
     {
       path: '/pure_poses',
       component: PurePose,
-      name: 'PurePose'
+      name: 'PurePose',
+      meta: { requiredAuth: true }
     },
     {
       path: '/poses',

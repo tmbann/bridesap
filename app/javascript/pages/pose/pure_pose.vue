@@ -62,8 +62,6 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex"
-
 export default {
   name: 'PurePose',
   data () {
@@ -92,9 +90,6 @@ export default {
         this.video.play()
       })
     }
-  },
-  computed: {
-    ...mapGetters("users", ["registeringUserId"])
   },
   methods: {
     shooting() {
@@ -140,7 +135,6 @@ export default {
           const formData = new FormData()
           formData.append('pure_pose[image]', pure_pose_image)
           formData.append('pure_pose[pure_shoulder_width]', this.pure_shoulder_width)
-          formData.append('pure_pose[user_id]', this.registeringUserId)
       
           this.$axios.post('pure_poses', formData)
           .then(res => {
@@ -149,7 +143,7 @@ export default {
               type: "success",
               message: "登録しました",
             });
-            this.$router.push({ name: 'LoginIndex' })
+            this.$router.push({ name: 'Mypage' })
           })
         }
       }

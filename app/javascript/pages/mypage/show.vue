@@ -66,24 +66,50 @@
       </v-row>
     </v-col>
 
-    <v-col cols="12">
-      <v-row justify="center">
-        <router-link
-          :to="{ name: 'Pose' }"
-          class="nav-link"
-        >
-          <v-btn
-            elevation="5"
-            rounded
-            color="primary"
-            class="white--text mb-3"
+    <v-row class="text-center">
+      <HowToUse />
+    </v-row>
+
+    <template v-if="purePose.pure_pose">
+      <v-col cols="12">
+        <v-row justify="center">
+          <router-link
+            :to="{ name: 'Pose' }"
+            class="nav-link"
           >
-            <v-icon>mdi-camera</v-icon>
-            撮影
-          </v-btn>
-        </router-link>
-      </v-row>
-    </v-col>
+            <v-btn
+              elevation="5"
+              rounded
+              color="primary"
+              class="white--text mb-3"
+            >
+              <v-icon>mdi-camera</v-icon>
+              撮影
+            </v-btn>
+          </router-link>
+        </v-row>
+      </v-col>
+    </template>
+    <template v-else>
+      <v-col cols="12">
+        <v-row justify="center">
+          <router-link
+            :to="{ name: 'PurePose' }"
+            class="nav-link"
+          >
+            <v-btn
+              elevation="5"
+              rounded
+              color="primary"
+              class="white--text mb-3"
+            >
+              <v-icon>mdi-camera</v-icon>
+              ありのままのあなたを撮影
+            </v-btn>
+          </router-link>
+        </v-row>
+      </v-col>
+    </template>
 
     <v-col cols="12" class="mb-10">
       <template>
@@ -237,19 +263,20 @@ import { mapGetters, mapActions } from "vuex"
 import dayjs from "dayjs"
 import timezone from "dayjs/plugin/timezone"
 import utc from "dayjs/plugin/utc"
+import HowToUse from "../../components/HowToUse.vue"
 
 dayjs.extend(timezone)
 dayjs.extend(utc)
 
 export default {
-  name: 'Mypage',
-  data () {
+  name: "Mypage",
+  data() {
     return {
       dialog: false,
       ps_menu: null,
       w_menu: null,
       dateToday: ""
-    }
+    };
   },
   computed: {
     ...mapGetters("users", ["user", "authUser"]),
@@ -258,29 +285,31 @@ export default {
   methods: {
     ...mapActions("users", ["fetchUser", "updateUser"]),
     ...mapActions("poses", ["fetchPurePose", "fetchBestPose"]),
-    submit () {
-      this.$refs.observer.validate()
+    submit() {
+      this.$refs.observer.validate();
     },
     handleUpdateUser() {
       try {
-        this.updateUser(this.user)
-        this.dialog = false
-      } catch (error) {
+        this.updateUser(this.user);
+        this.dialog = false;
+      }
+      catch (error) {
         console.log(error);
       }
     },
-    diffDate: function(target_date, today) {
-      return (dayjs(target_date).diff(today, 'days'))
+    diffDate: function (target_date, today) {
+      return (dayjs(target_date).diff(today, "days"));
     }
   },
   created() {
     this.fetchUser(),
     this.fetchPurePose(),
-    this.fetchBestPose()
+    this.fetchBestPose();
   },
   mounted() {
-    this.dateToday = dayjs(new Date()).tz('Asia/Tokyo').format()
-  }
+    this.dateToday = dayjs(new Date()).tz("Asia/Tokyo").format();
+  },
+  components: { HowToUse }
 }
 </script>
 

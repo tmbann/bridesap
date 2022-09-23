@@ -13,34 +13,7 @@
         <p>他撮り頻発イベント「前撮り」「結婚式」に向けて、華奢に写る姿勢を練習するアプリです。</p>
       </v-col>
 
-      <v-col cols="12" class="mt-10">
-        <span class="bgc text-h6 font-weight-bold">
-          練習の流れ
-        </span>
-        <v-row dense class="mb-5" justify="center">
-          <v-col 
-            v-for="(card, index) in cards"
-            :key="card.title"
-            cols="10"
-            md="4"
-            lg="3"
-            xl="2"
-            class="mb-3"
-          >
-            <v-card rounded class="rounded-xl">
-              <p class="text-button text-center mb-2">
-                Step{{ index + 1 }}
-              </p>
-              <v-card-title class="py-1">
-                {{ card.title }}
-              </v-card-title>
-              <v-card-text>
-                {{ card.text }}
-              </v-card-text>
-            </v-card>
-          </v-col>
-        </v-row>
-      </v-col>
+      <HowToUse />
 
       <v-col cols="12">
         <template v-if="!authUser">
@@ -58,15 +31,7 @@
           </p>
         </template>
         <template v-else>
-          <router-link
-            :to="{ name: 'Pose' }"
-            class="nav-link"
-          >
-            <v-btn elevation="5" rounded color="primary" class="white--text mb-5">
-              <v-icon>mdi-camera</v-icon>
-              撮影
-            </v-btn>
-          </router-link>
+          <SwitchButton />
         </template>
       </v-col>
     </v-row>
@@ -75,30 +40,19 @@
 
 <script>
 import { mapGetters } from "vuex"
+import HowToUse from "../../components/HowToUse.vue"
+import SwitchButton from "../../components/SwitchButton.vue";
 
 export default {
-  data() {
-    return {
-      top_src: require('../../../assets/images/top.jpeg'),
-      cards: [
-        {
-          title: 'ありのままのあなたを撮影',
-          text: 'ユーザー情報を登録後、まずは何も意識せずに、ありのままの姿勢で撮影。ありのままのあなたを撮影できるのはユーザー登録時のみです。'
-        },
-        {
-          title: 'ポイント確認＆撮影',
-          text: 'ログイン後、「華奢に写るポイント」を確認した上で再度撮影しましょう。撮影時は「世界で一番あーしがかわいい」というマインドを忘れずに。'
-        },
-        {
-          title: '判定',
-          text: '「ありのままのあなた」と「ポイントを意識して撮影したあなた」を比較。ありのままのあなたからどれだけ華奢になれたか確認しましょう。'
-        }
-      ]
-    }
-  },
-  computed: {
-    ...mapGetters("users", ["authUser"])
-  },
+    data() {
+      return {
+        top_src: require("../../../assets/images/top.jpeg")
+      };
+    },
+    computed: {
+        ...mapGetters("users", ["authUser"]),
+    },
+    components: { HowToUse, SwitchButton }
 }
 </script>
 

@@ -46,15 +46,7 @@
               <v-list-item-title>マイページ</v-list-item-title>
             </router-link>
           </v-list-item>
-          <v-list-item>
-            <v-icon>mdi-camera</v-icon>
-            <router-link
-              :to="{ name: 'Pose' }"
-              class="nav-link"
-            >
-              <v-list-item-title>撮影</v-list-item-title>
-            </router-link>
-          </v-list-item>
+          <SwitchLink />
           <v-list-item link @click.native="handleLogout">
             <v-icon>mdi-logout</v-icon>
             <v-list-item-title class="nav-link">ログアウト</v-list-item-title>
@@ -67,28 +59,31 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex"
+import SwitchLink from "./SwitchLink.vue"
 
 export default {
-  name: 'TheHeader',
-  data () {
-    return {
-      drawer: false,
-    }
-  },
-  computed: {
-    ...mapGetters("users", ["authUser"])
-  },
-  methods: {
-    ...mapActions("users", ["logoutUser"]),
-    async handleLogout() {
-      try {
-        await this.logoutUser()
-        this.$router.push({name: 'TopIndex'})
-      } catch (error) {
-        console.log(error)
-      }
-    }
-  }
+    name: "TheHeader",
+    data() {
+        return {
+            drawer: false,
+        };
+    },
+    computed: {
+        ...mapGetters("users", ["authUser"]),
+    },
+    methods: {
+        ...mapActions("users", ["logoutUser"]),
+        async handleLogout() {
+            try {
+                await this.logoutUser();
+                this.$router.push({ name: "TopIndex" });
+            }
+            catch (error) {
+                console.log(error);
+            }
+        }
+    },
+    components: { SwitchLink }
 }
 </script>
 

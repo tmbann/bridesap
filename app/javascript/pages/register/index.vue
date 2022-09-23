@@ -151,7 +151,7 @@
           color="primary"
         >
           <v-icon>mdi-account</v-icon>
-          登録＆ありのままのあなたを撮影
+          登録
         </v-btn>
         <p class="pink--text text-center mt-5">{{ errorMessage }}</p>
       </form>
@@ -160,7 +160,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex"
+import { mapActions } from "vuex"
 
 export default {
   name: "RegisterIndex",
@@ -187,9 +187,6 @@ export default {
       val && setTimeout(() => (this.activePicker = 'YEAR'))
     },
   },
-  computed: {
-    ...mapGetters("users", ["registeringUserId"])
-  },
   methods: {
     ...mapActions("users", ["registerUser"]),
     submit () {
@@ -199,7 +196,7 @@ export default {
       try {
         await
           this.registerUser(this.user)
-          this.$router.push({ name: 'PurePose' })
+          this.$router.push({ name: 'LoginIndex' })
       } catch (error) {
         console.log(error.response);
         this.errorMessage = error.response.data.errors.detail;

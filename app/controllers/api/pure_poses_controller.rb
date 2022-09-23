@@ -1,5 +1,7 @@
 class Api::PurePosesController < ApplicationController
+  before_action :authenticate!
   skip_before_action :require_login
+  skip_before_action :verify_authenticity_token
 
   def index
     @pure_pose = PurePose.find_by(user_id: login_user.id)
@@ -16,7 +18,7 @@ class Api::PurePosesController < ApplicationController
   end
   
   def create
-    @pure_pose = PurePose.new(pure_pose_params)
+    @pure_pose = login_user.build_pure_pose(pure_pose_params)
 
     @pure_pose.parse_base64(params[:pure_pose][:image])
     
@@ -30,7 +32,7 @@ class Api::PurePosesController < ApplicationController
   private
 
   def pure_pose_params
-    params.require(:pure_pose).permit(:image, :pure_shoulder_width, :user_id)
+    params.require(:pure_pose).permit(:image, :pure_shoulder_width)
   end
 
   def encode_base64(image_file)

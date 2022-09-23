@@ -3,13 +3,11 @@ import axios from "../../plugins/axios";
 const state = {
   authUser: null,
   user: [],
-  registeringUserId: null
 }
 
 const getters = {
   authUser: state => state.authUser,
   user: state => state.user,
-  registeringUserId: state => state.registeringUserId
 }
 
 const mutations = {
@@ -22,9 +20,6 @@ const mutations = {
   updateUser: (state, user) => {
     state.user = user
   },
-  setRegisteringUserID: (state, user_id) => {
-    state.registeringUserId = user_id
-  }
 };
 
 const actions = {
@@ -62,7 +57,6 @@ const actions = {
   },
   async registerUser({ commit }, user) {
     const registerResponse = await axios.post('users', {user: user})
-    commit('setRegisteringUserID', registerResponse.data.id)
   },
   fetchUser({ commit }) {
     axios.get('mypage')
