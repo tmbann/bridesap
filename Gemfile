@@ -47,8 +47,12 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rubocop', require:false
   gem 'rubocop-rails', require:false
-  gem 'pg', '~> 1.1'
+  gem 'rubocop-rspec', require: false
+  gem 'rubocop-performance', require: false
+  gem 'rspec-rails'
+  gem 'factory_bot_rails'
   gem 'letter_opener_web'
+  gem 'pg', '~> 1.1'
 end
 
 group :development do
@@ -61,6 +65,11 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'foreman'
+end
+
+group :test do
+  gem 'capybara'
+  gem 'webdrivers'
 end
 
 group :production do
