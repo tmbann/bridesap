@@ -1,4 +1,7 @@
 # BRIDESAP
+## https://www.bridesap.com/
+### お試しログイン用メールアドレス： test@example.com
+### お試しログイン用パスワード： password
 
 ## サービス概要
 花嫁たちが  
@@ -34,7 +37,7 @@
 人生の大切な瞬間に自信を持って臨める人を増やしたい。
 
 ## 使用技術
-##### フロントエンド
+### フロントエンド
 Vue.js 2.6.11  
 　主要npmパッケージ  
 　└vuetify  
@@ -44,7 +47,7 @@ Vue.js 2.6.11
 　└vee-validate  
 Tensorflow.js  
 
-##### バックエンド
+### バックエンド
 Ruby 3.1.2  
 Rails 6.1.6  
 　主要Gem  
@@ -53,7 +56,7 @@ Rails 6.1.6
 　└rails-admin  
 　└cancancan
 
-##### インフラ
+### インフラ
 Heroku  
 PostgreSQL  
 Amazon S3  
