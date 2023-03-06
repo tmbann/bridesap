@@ -1,7 +1,5 @@
 # BRIDESAP
 ## https://www.bridesap.com/
-### お試しログイン用メールアドレス： test@example.com
-### お試しログイン用パスワード： password
 
 ## サービス概要
 花嫁たちが  
